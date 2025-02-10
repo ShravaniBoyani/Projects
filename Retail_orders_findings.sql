@@ -1,11 +1,5 @@
 SELECT * FROM retail_orders.retail_orders;
 
-#find top 10 highest reveue generating products 
-select product_id,sum(sale_price) as highest_revenue
-from retail_orders.retail_orders
-group by product_id
-Order by highest_revenue DESC
-Limit 10;
 
 #find top 5 highest selling products in each region
 
@@ -23,6 +17,7 @@ where rn<=5;
 
 
 #find month over month growth comparison for 2022 and 2023 sales 
+	
 with cte as (
 select year(order_date) as order_year,month(order_date) as order_month,
 sum(sale_price) as sales
@@ -39,6 +34,7 @@ order by order_month;
 
 
 #for each category which month had highest sales 
+	
 with cte as (
 select category,format(order_date,'yyyyMM') as order_year_month
 , sum(sale_price) as sales 
@@ -54,6 +50,7 @@ from cte
 where rn=1;
 
 #which sub category had highest growth by profit in 2023 compare to 2022
+	
 with cte1 as
 (select sub_category,year(order_date) as order_year,
 sum(sale_price) as sales
